@@ -3,6 +3,7 @@ from datetime import datetime #Importar librería para determinar la fecha
 
 app = Flask(__name__)
 
+#Definiciones de las clases
 class CuentaUsuario:
     def __init__(self, numero, nombre, saldo, numeros_contacto):
         self.numero = numero

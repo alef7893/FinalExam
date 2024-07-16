@@ -1,0 +1,21 @@
+1) Qué cambiaría en el código (Clases / Métodos) - No realizar la implementación, solo descripción.
+
+Para llevar a cabo este cambio de implementar un límite máximo de 200 soles por día, se modificará/agregará partes a nuestro código:
+
+a) La clase CuentaUsuario:
+
+Se agregará:
+    Atributos:
+        - TransaccionesDiarias: Puede ser una lista o un contador para registrara las transferencias realizadas en el presente día.   
+        - LimiteDiario: Una constane que determinará el límite máximo permitido por día (en ese caso 200 soles)
+    
+Se modificará:
+    Métodos:
+        - transferir_dinero(dinero, valor): Se modificará esta parte para incluir la lógica de implementación que verifique que la cantidad 
+        transferida en el día no exceda el monto establecido por día (en este caso 200 soles).
+    
+b) Enpoints:
+
+Se modificará:
+    /billetera/pagar  : Validar el límite diario establecido antes de realizar la transferencia
+

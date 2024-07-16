@@ -19,3 +19,14 @@ b) Enpoints:
 Se modificará:
     /billetera/pagar  : Validar el límite diario establecido antes de realizar la transferencia
 
+2) Qué casos de prueba nuevos serían necesarios?
+Nuevos Casos de Prueba Necesarios:
+    - Transferencia dentro del límite diario.
+    - Transferencia que excede el límite diario.
+    - Transferencia que exactamente alcanza el límite diario.
+    - Reset del límite diario al pasar al siguiente día.
+
+3) Los casos de prueba existentes garantizan que no se introduzcan errores en la funcionalidad existente?
+Cobertura de Casos de Prueba Existentes:
+    - Los casos de prueba existentes son necesarios pero no suficientes para garantizar la integridad de la nueva funcionalidad.
+    - Se deben añadir casos de prueba específicos para el límite diario para asegurar que no se introduzcan errores en la funcionalidad existente.

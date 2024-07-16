@@ -16,6 +16,7 @@ class CuentaUsuario:
         return self.historial
 
     def transferir_dinero(self, destino, valor):
+        # Se verifica que el saldo disponible sea mayor o igual al valor de la operación
         if destino.numero in self.numeros_contacto and self.saldo >= valor:
             operacion = Operacion(self, destino, valor)
             self.historial.append(operacion)
@@ -32,7 +33,11 @@ class Operacion:
         self.valor = valor
         self.fecha = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
-#Base de datos utilizada: se basó en el ejemplo del documento
+# Base de datos utilizada: se basó en el ejemplo del documento
+# Caso de prueba de error 3: Retornar una lista de contactos que contengan usuarios eliminados
+# Es posible que despues de eliminar a un usuario de nuestra base de datos, su número continue
+# en alguna lista de contactos de otros usuarios. Esto representa un gran problema, ya que puede 
+# conllevar a realizar operaciones con usuarios que no existen.
 BD = [
     CuentaUsuario("21345", "Arnaldo", 200, ["123", "456"]),
     CuentaUsuario("123", "Luisa", 400, ["456"]),
@@ -55,12 +60,18 @@ def contactos():
     else:
         return jsonify({"error": "Cuenta not found"}), 404
 
+# Caso de prueba de éxito 2: Realizar un pago con un monto menor o igual al disponible.
+# Caso de prueba de error 1: Realizar un pago con monto mayor al disponible
+# Caso de prueba de error 2: Registrar pagos de usuarios inexistentes
 @app.route('/billetera/pagar', methods=['POST'])
 def pagar():
     numero_origen = request.args.get('minumero')
     numero_destino = request.args.get('numerodestino')
     valor = float(request.args.get('valor'))
 
+    # Se verifica que tanto el usuario de origen como de destino
+    # existan para realizar la operación. En caso que no sea así,
+    # se reporta un mensaje de error
     cuenta_origen = encontrar_cuenta(numero_origen)
     cuenta_destino = encontrar_cuenta(numero_destino)
 
@@ -73,6 +84,7 @@ def pagar():
     else:
         return jsonify({"error": "Error en realizar la transferencia"}), 400
 
+# Caso de prueba de éxito 1: Poner a prueba la función de historial
 @app.route('/billetera/historial', methods=['GET'])
 def historial():
     numero = request.args.get('minumero')

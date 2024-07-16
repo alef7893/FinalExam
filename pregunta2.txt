@@ -1,0 +1,8 @@
+Casos de Éxito:
+    1. Retornar el historial de un usuario
+    2. Realizar un pago con un monto menor al disponible.
+
+Casos de Error:
+    1. Realizar un pago con monto mayor al disponible
+    2. Registrar pagos de usuarios inexistentes
+    3. Retornar una lista de contactos que contengan usuarios eliminados
